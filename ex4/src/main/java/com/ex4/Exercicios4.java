@@ -1,3 +1,16 @@
+/*
+HTTP Client em Java: O Automatizador de Relatórios da Citadela
+Fazer pedidos um a um no Bruno para saber quem está vivo ou morto no universo de Rick & Morty é trabalho de estagiário!
+Vamos usar o Java para analisar os primeiros 20 cidadãos do universo automaticamente.
+Modifiquem o código base em grupo para cumprir estes 4 objetivos:
+
+4. 
+    Se o vosso programa detetar um alien morto, deve iniciar uma investigação após o alerta para descobrir onde ele foi visto pela última vez.
+    Isolem o URL do episódio e façam o Java disparar um segundo pedido HTTP para o URL do episódio que acabaram de descobrir.
+    Extraiam o nome desse episódio e mostrem o veredicto no ecrã com este formato:
+    [ALERTA FORENSE] O último registo do alien morto foi no episódio: '...'.
+ */
+
 package com.ex4;
 
 import java.net.URI;
