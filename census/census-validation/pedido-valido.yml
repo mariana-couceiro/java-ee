@@ -1,0 +1,24 @@
+info:
+  name: pedido-valido
+  type: http
+
+http:
+  method: GET
+  url: http://localhost:8080/census?offset=1&limit=20&showAlerts=true
+  params:
+    - name: offset
+      value: "1"
+      type: query
+    - name: limit
+      value: "20"
+      type: query
+    - name: showAlerts
+      value: "true"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

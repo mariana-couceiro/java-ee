@@ -1,0 +1,18 @@
+info:
+  name: showAlerts-invalido
+  type: http
+
+http:
+  method: GET
+  url: http://localhost:8080/census?showAlerts=sim
+  params:
+    - name: showAlerts
+      value: sim
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

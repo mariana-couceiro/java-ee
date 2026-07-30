@@ -1,0 +1,18 @@
+info:
+  name: limit-sup-50
+  type: http
+
+http:
+  method: GET
+  url: http://localhost:8080/census?limit=70
+  params:
+    - name: limit
+      value: "70"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
