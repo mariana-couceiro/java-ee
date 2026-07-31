@@ -1,0 +1,23 @@
+info:
+  name: exemplo garfield
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/api/personagem
+  body:
+    type: json
+    data: |-
+      {
+        "nome": "Garfield",
+        "especie": "Gato",
+        "comidaFavorita": "Lasanha"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
