@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.census.AppTest" time="0.013" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.census.AppTest" time="0.016" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="26"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PT"/>
     <property name="sun.boot.library.path" value="/Users/marianacouceiro/Library/Application Support/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest/lib"/>
-    <property name="sun.java.command" value="/Users/marianacouceiro/jmd-java/java-ee/census/target/surefire/surefirebooter12449005102642889203.jar /Users/marianacouceiro/jmd-java/java-ee/census/target/surefire 2026-07-30T23-30-56_711-jvmRun1 surefire9600130543243038812tmp surefire_015857293080637657490tmp"/>
+    <property name="sun.java.command" value="/Users/marianacouceiro/jmd-java/java-ee/census/target/surefire/surefirebooter7387735905209432542.jar /Users/marianacouceiro/jmd-java/java-ee/census/target/surefire 2026-07-31T09-40-51_403-jvmRun1 surefire10982546734067116248tmp surefire_0328938339023584803tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/marianacouceiro/jmd-java/java-ee/census/target/test-classes:/Users/marianacouceiro/jmd-java/java-ee/census/target/classes:/Users/marianacouceiro/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/marianacouceiro/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/marianacouceiro/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.21.5/jackson-databind-2.21.5.jar:/Users/marianacouceiro/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/Users/marianacouceiro/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.21.5/jackson-core-2.21.5.jar:/Users/marianacouceiro/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/marianacouceiro/jmd-java/java-ee/census/target/surefire/surefirebooter12449005102642889203.jar"/>
+    <property name="surefire.real.class.path" value="/Users/marianacouceiro/jmd-java/java-ee/census/target/surefire/surefirebooter7387735905209432542.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="26.0.1+8"/>
@@ -59,5 +59,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="70.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.census.AppTest" time="0.003"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.census.AppTest" time="0.002"/>
 </testsuite>

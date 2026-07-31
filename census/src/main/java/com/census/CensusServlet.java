@@ -6,6 +6,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,7 +74,6 @@ public class CensusServlet extends HttpServlet {
             return;
         }
 
-
         if (showAlertsParam != null) {
             if (showAlertsParam.equalsIgnoreCase("true")) {
                 showAlerts = true;
@@ -107,7 +111,6 @@ public class CensusServlet extends HttpServlet {
         html.append("<h1>CENSO RICK & MORTY</h1>");
         html.append("<hr>");
 
-
         for (int i = offset; i < offset + limit; i++) {
 
             String url =
@@ -128,6 +131,7 @@ public class CensusServlet extends HttpServlet {
                                 HttpResponse.BodyHandlers.ofString());
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+
                 throw new ServletException(
                         "O pedido HTTP foi interrompido.",
                         e);
@@ -159,9 +163,12 @@ public class CensusServlet extends HttpServlet {
                     && status.equals("Dead")) {
 
                 html.append("<h3 style='color:red'>");
-                html.append("[PERIGO] Um Alien foi encontrado morto com o ID ")
+
+                html.append(
+                                "[PERIGO] Um Alien foi encontrado morto com o ID ")
                         .append(i)
                         .append("!");
+
                 html.append("</h3>");
 
                 JsonNode episodios =
@@ -189,6 +196,7 @@ public class CensusServlet extends HttpServlet {
                                         HttpResponse.BodyHandlers.ofString());
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
+
                         throw new ServletException(
                                 "O pedido ao episódio foi interrompido.",
                                 e);
@@ -204,10 +212,15 @@ public class CensusServlet extends HttpServlet {
                                 episodio.get("name").asText();
 
                         html.append("<p>");
-                        html.append("<b>[ALERTA FORENSE]</b> ");
-                        html.append("O último registo do alien morto foi no episódio: <i>")
+
+                        html.append(
+                                "<b>[ALERTA FORENSE]</b> ");
+
+                        html.append(
+                                        "O último registo do alien morto foi no episódio: <i>")
                                 .append(nomeEpisodio)
                                 .append("</i>.");
+
                         html.append("</p>");
                     }
                 }
@@ -234,7 +247,52 @@ public class CensusServlet extends HttpServlet {
         html.append("</html>");
 
         out.print(html.toString());
+
+        escreverLog(
+                offset,
+                limit,
+                showAlerts,
+                vivos,
+                mortos,
+                desconhecidos);
     }
+
+    private void escreverLog(
+        int offset,
+        int limit,
+        boolean showAlerts,
+        int vivos,
+        int mortos,
+        int desconhecidos)
+        throws IOException {
+        System.out.println("Diretório atual: " + Path.of("").toAbsolutePath());
+    
+    DateTimeFormatter formato =
+            DateTimeFormatter.ofPattern(
+                    "yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+    String timestamp =
+            LocalDateTime.now().format(formato);
+
+    String linha =
+            "[" + timestamp + "] "
+            + "Servlet /census executado com sucesso"
+            + " | offset=" + offset
+            + " | limit=" + limit
+            + " | showAlerts=" + showAlerts
+            + " | vivos=" + vivos
+            + " | mortos=" + mortos
+            + " | desconhecidos=" + desconhecidos
+            + System.lineSeparator();
+
+    Path caminho = Path.of("..", "..", "citadela_audit.log").normalize();
+
+    Files.writeString(
+            caminho,
+            linha,
+            StandardOpenOption.CREATE,
+            StandardOpenOption.APPEND);
+}
 
     private void enviarErro(
             HttpServletResponse response,
