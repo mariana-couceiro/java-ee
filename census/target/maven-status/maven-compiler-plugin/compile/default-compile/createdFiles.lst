@@ -1,1 +1,2 @@
-com/census/CensusServlet.class
+com/census/RestApplication.class
+com/census/CensusResource.class
