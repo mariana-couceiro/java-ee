@@ -3,9 +3,12 @@ package com.personagens;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class PersonagemRepository {
 
-    private static final List<Personagem> personagens = new ArrayList<>();
+    private final List<Personagem> personagens = new ArrayList<>();
 
     public void adicionar(Personagem personagem) {
         personagens.add(personagem);
@@ -44,8 +47,9 @@ public class PersonagemRepository {
     }
 
     public boolean apagarPorNome(String nome) {
+
         return personagens.removeIf(
-            personagem -> personagem.getNome().equalsIgnoreCase(nome)
+                personagem -> personagem.getNome().equalsIgnoreCase(nome)
         );
     }
 }

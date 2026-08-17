@@ -2,6 +2,7 @@ package com.personagens;
 
 import java.util.List;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -16,7 +17,8 @@ import jakarta.ws.rs.core.Response;
 @Path("/personagem")
 public class PersonagemController {
 
-    private final PersonagemService service = new PersonagemService();
+    @Inject
+    private PersonagemService service;
 
     // CREATE
     @POST
@@ -24,7 +26,8 @@ public class PersonagemController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response criarPersonagem(Personagem personagem) {
 
-        Personagem novaPersonagem = service.criarPersonagem(personagem);
+        Personagem novaPersonagem =
+                service.criarPersonagem(personagem);
 
         return Response
                 .status(Response.Status.CREATED)
@@ -36,18 +39,25 @@ public class PersonagemController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Personagem> listarPersonagens() {
+
         return service.listarPersonagens();
     }
 
+    // READ - procurar pelo nome
     @GET
     @Path("/{nome}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obterPersonagemPorNome(@PathParam("nome") String nome) {
+    public Response obterPersonagemPorNome(
+            @PathParam("nome") String nome) {
 
-        Personagem personagem = service.procurarPorNome(nome);
+        Personagem personagem =
+                service.procurarPorNome(nome);
 
         if (personagem != null) {
-            return Response.ok(personagem).build();
+
+            return Response
+                    .ok(personagem)
+                    .build();
         }
 
         return Response
@@ -57,6 +67,7 @@ public class PersonagemController {
                 .build();
     }
 
+    // UPDATE
     @PUT
     @Path("/{nome}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -66,10 +77,16 @@ public class PersonagemController {
             Personagem dadosAtualizados) {
 
         Personagem personagem =
-                service.editarPersonagem(nome, dadosAtualizados);
+                service.editarPersonagem(
+                        nome,
+                        dadosAtualizados
+                );
 
         if (personagem != null) {
-            return Response.ok(personagem).build();
+
+            return Response
+                    .ok(personagem)
+                    .build();
         }
 
         return Response
@@ -79,13 +96,17 @@ public class PersonagemController {
                 .build();
     }
 
+    // DELETE
     @DELETE
     @Path("/{nome}")
-    public Response apagarPersonagem(@PathParam("nome") String nome) {
+    public Response apagarPersonagem(
+            @PathParam("nome") String nome) {
 
-        boolean removida = service.apagarPorNome(nome);
+        boolean removida =
+                service.apagarPorNome(nome);
 
         if (removida) {
+
             return Response
                     .ok("Personagem eliminada com sucesso.")
                     .type(MediaType.TEXT_PLAIN)
