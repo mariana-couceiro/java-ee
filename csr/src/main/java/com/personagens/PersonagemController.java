@@ -39,7 +39,6 @@ public class PersonagemController {
         return service.listarPersonagens();
     }
 
-    // READ - procurar pelo nome
     @GET
     @Path("/{nome}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +57,6 @@ public class PersonagemController {
                 .build();
     }
 
-    // UPDATE
     @PUT
     @Path("/{nome}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +79,6 @@ public class PersonagemController {
                 .build();
     }
 
-    // DELETE
     @DELETE
     @Path("/{nome}")
     public Response apagarPersonagem(@PathParam("nome") String nome) {
