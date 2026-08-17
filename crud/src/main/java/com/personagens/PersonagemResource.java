@@ -56,7 +56,6 @@ public class PersonagemResource {
                 .build();
     }
 
-    // DELETE - apagar pelo nome
     @DELETE
     @Path("/{nome}")
     public Response apagarPersonagem(@PathParam("nome") String nome) {
