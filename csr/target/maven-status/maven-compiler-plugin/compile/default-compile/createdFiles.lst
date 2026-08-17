@@ -1,0 +1,5 @@
+com/personagens/Personagem.class
+com/personagens/PersonagemController.class
+com/personagens/PersonagemRepository.class
+com/personagens/RestApplication.class
+com/personagens/PersonagemService.class
