@@ -1,0 +1,12 @@
+127.0.0.1 - - [17/Aug/2026:11:01:43 +0100] "POST /api/personagem HTTP/1.1" 201 70
+127.0.0.1 - - [17/Aug/2026:11:03:38 +0100] "GET /api/personagem HTTP/1.1" 200 72
+127.0.0.1 - - [17/Aug/2026:11:06:18 +0100] "GET /api/personagem/Rick HTTP/1.1" 200 70
+127.0.0.1 - - [17/Aug/2026:11:07:21 +0100] "DELETE /api/personagem/Rick HTTP/1.1" 200 33
+127.0.0.1 - - [17/Aug/2026:11:08:53 +0100] "DELETE /api/personagem/Rick HTTP/1.1" 404 27
+127.0.0.1 - - [17/Aug/2026:11:09:09 +0100] "GET /api/personagem/Rick HTTP/1.1" 404 27
+127.0.0.1 - - [17/Aug/2026:11:11:22 +0100] "POST /api/personagem HTTP/1.1" 201 70
+127.0.0.1 - - [17/Aug/2026:11:11:33 +0100] "DELETE /api/Rick HTTP/1.1" 405 703
+127.0.0.1 - - [17/Aug/2026:11:12:15 +0100] "GET /api/personagem HTTP/1.1" 200 72
+127.0.0.1 - - [17/Aug/2026:11:12:44 +0100] "GET /api/personagem/Rick HTTP/1.1" 200 70
+127.0.0.1 - - [17/Aug/2026:11:12:55 +0100] "GET /api/personagem/Rick HTTP/1.1" 200 70
+127.0.0.1 - - [17/Aug/2026:11:13:30 +0100] "DELETE /api/personagem/Rick HTTP/1.1" 200 33
