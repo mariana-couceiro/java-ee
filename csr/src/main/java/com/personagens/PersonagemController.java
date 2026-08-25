@@ -1,11 +1,14 @@
 package com.personagens;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -20,7 +23,7 @@ public class PersonagemController {
     @Inject
     private PersonagemService service;
 
-    // CREATE
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -29,34 +32,53 @@ public class PersonagemController {
         Personagem novaPersonagem =
                 service.criarPersonagem(personagem);
 
+        Map<String, Object> dadosPersonagem =
+                criarMapaPersonagem(novaPersonagem);
+
+        Map<String, Object> resposta =
+                new LinkedHashMap<>();
+
+        resposta.put(
+                "mensagem",
+                "Personagem criada com sucesso."
+        );
+
+        resposta.put(
+                "personagem",
+                dadosPersonagem
+        );
+
         return Response
                 .status(Response.Status.CREATED)
-                .entity(novaPersonagem)
+                .entity(resposta)
                 .build();
     }
 
-    // READ - listar todas
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Personagem> listarPersonagens() {
+    public List<Map<String, Object>> listarPersonagens() {
 
-        return service.listarPersonagens();
+        List<Personagem> personagens =
+                service.listarPersonagens();
+
+        return personagens.stream()
+                .map(this::criarMapaPersonagem)
+                .toList();
     }
 
-    // READ - procurar pelo nome
     @GET
-    @Path("/{nome}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response obterPersonagemPorNome(
-            @PathParam("nome") String nome) {
+    public Response obterPersonagemPorId(
+            @PathParam("id") int id) {
 
         Personagem personagem =
-                service.procurarPorNome(nome);
+                service.procurarPorId(id);
 
         if (personagem != null) {
 
             return Response
-                    .ok(personagem)
+                    .ok(criarMapaPersonagem(personagem))
                     .build();
         }
 
@@ -67,25 +89,24 @@ public class PersonagemController {
                 .build();
     }
 
-    // UPDATE
     @PUT
-    @Path("/{nome}")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response editarPersonagem(
-            @PathParam("nome") String nome,
+            @PathParam("id") int id,
             Personagem dadosAtualizados) {
 
         Personagem personagem =
                 service.editarPersonagem(
-                        nome,
+                        id,
                         dadosAtualizados
                 );
 
         if (personagem != null) {
 
             return Response
-                    .ok(personagem)
+                    .ok(criarMapaPersonagem(personagem))
                     .build();
         }
 
@@ -96,20 +117,24 @@ public class PersonagemController {
                 .build();
     }
 
-    // DELETE
-    @DELETE
-    @Path("/{nome}")
-    public Response apagarPersonagem(
-            @PathParam("nome") String nome) {
+    @PATCH
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response atualizarParcialmente(
+            @PathParam("id") int id,
+            Personagem dadosAtualizados) {
 
-        boolean removida =
-                service.apagarPorNome(nome);
+        Personagem personagem =
+                service.atualizarParcialmente(
+                        id,
+                        dadosAtualizados
+                );
 
-        if (removida) {
+        if (personagem != null) {
 
             return Response
-                    .ok("Personagem eliminada com sucesso.")
-                    .type(MediaType.TEXT_PLAIN)
+                    .ok(criarMapaPersonagem(personagem))
                     .build();
         }
 
@@ -118,5 +143,44 @@ public class PersonagemController {
                 .type(MediaType.TEXT_PLAIN)
                 .entity("Personagem não encontrada.")
                 .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response apagarPersonagem(
+            @PathParam("id") int id) {
+
+        boolean removida =
+                service.apagarPorId(id);
+
+        if (removida) {
+
+            return Response
+                    .ok("Personagem eliminada com sucesso.")
+                    .build();
+        }
+
+        return Response
+                .status(Response.Status.NOT_FOUND)
+                .entity("Personagem não encontrada.")
+                .build();
+    }
+
+    private Map<String, Object> criarMapaPersonagem(
+            Personagem personagem) {
+
+        Map<String, Object> dados =
+                new LinkedHashMap<>();
+
+        dados.put("id", personagem.getId());
+        dados.put("nome", personagem.getNome());
+        dados.put("especie", personagem.getEspecie());
+        dados.put(
+                "comidaFavorita",
+                personagem.getComidaFavorita()
+        );
+
+        return dados;
     }
 }

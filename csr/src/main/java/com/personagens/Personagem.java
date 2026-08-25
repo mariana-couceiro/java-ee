@@ -1,6 +1,26 @@
 package com.personagens;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+
+@Entity
 public class Personagem {
+
+    @Id
+    @SequenceGenerator(
+            name = "personagem_seq",
+            sequenceName = "personagem_seq",
+            initialValue = 1,
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "personagem_seq"
+    )
+    private int id;
 
     private String nome;
     private String especie;
@@ -13,6 +33,14 @@ public class Personagem {
         this.nome = nome;
         this.especie = especie;
         this.comidaFavorita = comidaFavorita;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

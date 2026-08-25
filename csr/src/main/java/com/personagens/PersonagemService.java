@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 public class PersonagemService {
@@ -11,7 +12,9 @@ public class PersonagemService {
     @Inject
     private PersonagemRepository repository;
 
-    public Personagem criarPersonagem(Personagem personagem) {
+    @Transactional
+    public Personagem criarPersonagem(
+            Personagem personagem) {
 
         if (personagem.getComidaFavorita() == null ||
                 personagem.getComidaFavorita().isBlank()) {
@@ -25,15 +28,18 @@ public class PersonagemService {
     }
 
     public List<Personagem> listarPersonagens() {
-        return repository.listarTodas();
+
+        return repository.listarTodos();
     }
 
-    public Personagem procurarPorNome(String nome) {
-        return repository.procurarPorNome(nome);
+    public Personagem procurarPorId(int id) {
+
+        return repository.procurarPorId(id);
     }
 
+    @Transactional
     public Personagem editarPersonagem(
-            String nome,
+            int id,
             Personagem dadosAtualizados) {
 
         if (dadosAtualizados.getComidaFavorita() == null ||
@@ -42,10 +48,26 @@ public class PersonagemService {
             dadosAtualizados.setComidaFavorita("Pizza");
         }
 
-        return repository.editarPorNome(nome, dadosAtualizados);
+        return repository.editarPorId(
+                id,
+                dadosAtualizados
+        );
     }
 
-    public boolean apagarPorNome(String nome) {
-        return repository.apagarPorNome(nome);
+    @Transactional
+    public Personagem atualizarParcialmente(
+            int id,
+            Personagem dadosAtualizados) {
+
+        return repository.atualizarParcialmente(
+                id,
+                dadosAtualizados
+        );
+    }
+
+    @Transactional
+    public boolean apagarPorId(int id) {
+
+        return repository.apagarPorId(id);
     }
 }

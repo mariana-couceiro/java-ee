@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0"
+                xmlns="https://jakarta.ee/xml/ns/persistence"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="testPU" transaction-type="JTA">
+        <!-- Diz ao TomEE para usar a Base de Dados interna pré-configurada -->
+        <jta-data-source>Default JDBC Database</jta-data-source>
+
+        <properties>
+            <!-- Isto diz ao JPA para criar as tabelas sozinho ao arrancar! -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+        </properties>
+    </persistence-unit>
+</persistence>

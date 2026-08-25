@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+            https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -9,7 +9,6 @@
     <artifactId>csr</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Para correr como aplicação web no TomEE -->
     <packaging>war</packaging>
 
     <properties>
@@ -19,26 +18,19 @@
 
     <dependencies>
 
-        <!-- Jakarta REST / Jakarta EE -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>4.1.0</version>
-            <scope>provided</scope>
-        </dependency> 
 
     </dependencies>
 
     <build>
+
         <plugins>
 
-            <!-- Compilar com Java 21 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -48,7 +40,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Criar o WAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -58,7 +49,6 @@
                 </configuration>
             </plugin>
 
-            <!-- TomEE -->
             <plugin>
                 <groupId>org.apache.tomee.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
@@ -66,13 +56,12 @@
 
                 <configuration>
                     <tomeeClassifier>plus</tomeeClassifier>
-
-                    <!-- Faz a aplicação ficar diretamente em localhost:8080 -->
                     <context>ROOT</context>
                 </configuration>
             </plugin>
 
         </plugins>
+
     </build>
 
 </project>
